@@ -121,17 +121,6 @@ def submit(request, course_id):
     return redirect('onlinecourse:show_exam_result', course_id=course.id, submission_id=submission.id)
 
 
-# <HINT> A example method to collect the selected choices from the exam form from the request object
-# def extract_answers(request):
-#    submitted_anwsers = []
-#    for key in request.POST:
-#        if key.startswith('choice'):
-#            value = request.POST[key]
-#            choice_id = int(value)
-#            submitted_anwsers.append(choice_id)
-#    return submitted_anwsers
-
-
 def show_exam_result(request, course_id, submission_id):
     course = get_object_or_404(Course, id=course_id)
     submission = get_object_or_404(Submission, id=submission_id)
