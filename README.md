@@ -1,15 +1,72 @@
+# Online Course Plattform mit Prüfungsfunktion (Django)
 
-**General Notes**
+Diese Anwendung ist eine webbasierte Lernplattform auf Basis von **Django**. Nutzer können sich registrieren, anmelden, Kurse durchsuchen, sich einschreiben und am Ende kursbezogene Prüfungen mit Multiple-Choice-Fragen absolvieren.
 
-An `onlinecourse` app has already been provided in this repo upon which you will be adding a new assesement feature.
+## Projektüberblick
 
-- If you want to develop the final project on Theia hosted by [IBM Developer Skills Network](https://labs.cognitiveclass.ai/), you will need to create the same project structure on Theia workspace and save it everytime you close the browser
-- Or you could develop the final project locally by setting up your own Python runtime and IDE
-- Hints for the final project are left on source code files
-- You may choose any cloud platform for deployment (default is IBM Cloud Foundry)
-- Depends on your deployment, you may choose any SQL database Django supported such as SQLite3, PostgreSQL, and MySQL (default is SQLite3)
+Die App besteht aus einem Django-Projekt (`myproject`) und der Hauptanwendung `onlinecourse`.
 
-**ER Diagram**
-For your reference, we have prepared the ER diagram design for the new assesement feature.
+Wichtige Funktionen:
+- Benutzerregistrierung und Login/Logout
+- Kursübersicht mit Einschreibestatus
+- Kurseinschreibung mit Zählung der Teilnehmer
+- Kursdetailseiten mit Lektionen und Prüfung
+- Prüfungsabgabe und automatische Punkteberechnung
+- Anzeige des Prüfungsergebnisses pro Abgabe
 
-![Onlinecourse ER Diagram](https://github.com/ibm-developer-skills-network/final-cloud-app-with-database/blob/master/static/media/course_images/onlinecourse_app_er.png)
+## Datenmodell (Kurzfassung)
+
+Die zentrale Domäne ist `onlinecourse/models.py` und enthält u. a.:
+- `Instructor` und `Learner` für Rollenprofile
+- `Course` und `Lesson` für Kursinhalte
+- `Enrollment` für Einschreibungen
+- `Question`, `Choice` und `Submission` für die Prüfungslogik
+
+## Technologie-Stack
+
+- Python 3.8
+- Django 3.1.3
+- SQLite (standardmäßig lokal)
+- Gunicorn (für Deployment)
+- Bootstrap (über CDN in Templates)
+
+## Lokale Ausführung
+
+1. Abhängigkeiten installieren:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Migrationen anwenden:
+   ```bash
+   python manage.py migrate
+   ```
+3. Entwicklungsserver starten:
+   ```bash
+   python manage.py runserver
+   ```
+4. Anwendung öffnen:
+   - `http://127.0.0.1:8000/onlinecourse/`
+
+## Nützliche Befehle
+
+- Tests ausführen:
+  ```bash
+  python manage.py test
+  ```
+- Admin-Benutzer erstellen:
+  ```bash
+  python manage.py createsuperuser
+  ```
+
+## Deployment-Hinweise
+
+Das Repository enthält bereits Dateien für Cloud-Deployment, u. a.:
+- `Procfile`
+- `manifest.yml`
+- `runtime.txt`
+
+Die Anwendung ist so strukturiert, dass sie mit einer relationalen Datenbank betrieben werden kann (lokal standardmäßig SQLite; alternativ z. B. PostgreSQL/MySQL via Django-Konfiguration).
+
+## Lizenz
+
+Siehe `LICENSE`.
